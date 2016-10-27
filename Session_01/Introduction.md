@@ -21,3 +21,5 @@
 - [RStudion](https://www.rstudio.com/products/rstudio/) installieren
 - [Git Tutorial](https://try.github.io/)
 - [Markdown](https://daringfireball.net/projects/markdown/syntax)-Einführung durchlesen
+- [Github Student Pack](https://education.github.com/)
+
