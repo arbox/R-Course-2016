@@ -21,8 +21,7 @@ plot(cars)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-# Erste Ebene
+## Aufgaben für selbstständige Arbeit
 
-## Zweite Ebene
-
-### Dritte Ebene
+- in form eines `Rmd`-Dokumentes zugängliche Hilfequellen auflisten
+- ein Streuungsdiagramm mit beliebigen Daten erstellen und exportieren
