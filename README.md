@@ -5,3 +5,5 @@ _Aufgaben und Skripte für den Statistikkurs im Wintersemester 16/17._
 ## Sitzung 01
 Git und Github. Projektverwaltung. Die Arbeitsumgebung `RStudio`.
 
+## Setzung 03
+Literate Programming. Elemente der Sprache `R`.
