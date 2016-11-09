@@ -7,3 +7,6 @@ Git und Github. Projektverwaltung. Die Arbeitsumgebung `RStudio`.
 
 ## Sitzung 02
 Literate Programming. Elemente der Sprache `R`.
+
+## Sitzung 03
+Datenstrukturen in R. Arbeit mit diversen Datenquellen.
