@@ -10,3 +10,6 @@ Literate Programming. Elemente der Sprache `R`.
 
 ## Sitzung 03
 Datenstrukturen in R. Arbeit mit diversen Datenquellen.
+
+## Sitzung 04
+Datenabfragen. Konflikte in Git.
