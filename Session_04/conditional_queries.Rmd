@@ -1,0 +1,10 @@
+# Conditional Queries
+
+
+## Aufgaben für selbstständige Arbeit
+* auf der Seite http://swirlstats.com/ das Paket `swirl` kennenlernen
+
+* den Swirl-Kurs "R Programmin by swirl team" anfangen
+
+* die Dokumentation für das Paket `readr` durchlesen: https://github.com/tidyverse/readr
+
