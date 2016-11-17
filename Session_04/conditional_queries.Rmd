@@ -1,5 +1,29 @@
-# Conditional Queries
+# Bedingte Abfragen
 
+```{r}
+df <- read.csv('../data/pos_table.csv')
+print(df, row.names = F)
+```
+
+## Dataframe-Elemente ansprechen
+```{r}
+df$Klasse # Spalte auswaehlen
+df[,2] # Spalte auswaehlen
+df[1,] # Zeile auswaehlen
+df[1, 1] # Zelle auswaehlen
+```
+
+## Bedingte Abfragen
+```{r}
+v1 <- 1:10
+v1[c(T, F)]
+```
+
+```{r}
+v.of.classes <- df$Klasse == 'offen'
+df[v.of.classes, ]
+df[v.of.classes, ][df$TypenFrequenz > 150, ]
+```
 
 ## Aufgaben für selbstständige Arbeit
 * auf der Seite http://swirlstats.com/ das Paket `swirl` kennenlernen
