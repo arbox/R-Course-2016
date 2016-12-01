@@ -51,7 +51,7 @@ pie(table(FILLER))
 barplot(table(FILLER))
 barplot(table(FILLER),
         main = 'Unser Balkendiagramm',
-        # ylim
+        ylim = c(0, 600),
         # xlim
         col = c('red', 'green', 'blue'),
         names.arg = c('Aeh', 'Aehm', 'Volle Stille')
@@ -62,7 +62,7 @@ barplot(table(FILLER),
 
 ## Histogramme
 ```{r hist, echo = T} 
-hist(LAENGE, freq = T) #, breaks = c(200,350, 800, 1600))
+hist(LAENGE, freq = T, breaks = c(200,350, 800, 1600))
 ```
 
 ## Daten einlesen
@@ -162,7 +162,7 @@ mean(normal.sample)
 ## Treppenfunktionen
 ```{r, functionplot, echo = T}
 
-plot(cumsum(t2), type = 'S')
+plot(cumsum(t2), type = 'l')
 
 ```
 
