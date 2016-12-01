@@ -1,0 +1,177 @@
+# Explorative Analyse
+
+## Daten einlesen
+```{r input, echo = TRUE}
+df <- read.table('../data/03-1_aeh(m).txt', header = T)
+
+str(df)
+
+head(df)
+tail(df, n = 3)
+```
+
+## Klassenbildung
+
+Sturges' Formel
+$$
+k = \log_2 n + 1
+$$
+
+## Häufigkeistverteilungen
+```{r table, echo = T}
+head(df$FILLER)
+
+filler.column <- df[, 3]
+
+attach(df)
+str(FILLER)
+
+t1 <- table(FILLER)
+class(t1)
+t1
+
+table(FILLER) / length(FILLER)
+
+prop.table(table(FILLER))
+
+cumsum(table(FILLER))
+```
+
+
+## Kuchendiagramme
+
+```{r piechart, echo = TRUE}
+pie(table(FILLER))
+```
+
+
+## Balkendiagramme
+
+```{r barplot, echo = T}
+barplot(table(FILLER))
+barplot(table(FILLER),
+        main = 'Unser Balkendiagramm',
+        # ylim
+        # xlim
+        col = c('red', 'green', 'blue'),
+        names.arg = c('Aeh', 'Aehm', 'Volle Stille')
+        )
+
+```
+
+
+## Histogramme
+```{r hist, echo = T} 
+hist(LAENGE, freq = T) #, breaks = c(200,350, 800, 1600))
+```
+
+## Daten einlesen
+```{r reading_XML, highlight = TRUE, results = 'hide', echo = TRUE, cache = TRUE}
+library(XML)
+
+tokens <- vector('character')
+types <- vector('character')
+
+xmlEventParse(
+  "../data/t_990505_47.xml", 
+  handlers = list(
+    't' = function(name, attr) {
+      tokens <<- c(tokens, attr['word'])
+      types <<- c(types, attr['lemma'])
+      ## morphology
+      }
+    ),
+  addContext = FALSE
+  )
+
+#raw.token.lengths <- nchar(tokens)
+# names(tokens) <- NULL
+tokens <- unname(tokens)
+token.lengths <- nchar(tokens)
+
+```
+
+```{r}
+length(tokens)
+```
+
+## Wörter auswählen
+
+```{r choose_words, echo = T}
+tokens[nchar(tokens) == 22]
+```
+
+```{r}
+#raw.token.lengths
+```
+
+## Modus
+```{r mode, echo = T}
+mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+#token.lengths
+t1 <- table(token.lengths)
+t1 
+mode(token.lengths)
+```
+
+## Arbeit mit Tabellen
+```{r tables, echo = T}
+summary(t1)
+t1[1]
+dimnames(t1)
+dim(t1)
+```
+
+## Median
+```{r median, echo = T}
+median(token.lengths)
+length(token.lengths)
+head(sort(token.lengths), length(token.lengths)/2)
+t2 <- prop.table(table(token.lengths))
+cumsum(t2)
+```
+
+```{r descriptive_values, echo = T}
+mode(token.lengths)
+median(token.lengths)
+mean(token.lengths)
+
+```
+```{r}
+hist(token.lengths)
+```
+
+```{r symmetric_data, echo = T}
+set.seed(12)
+normal.sample <- rnorm(100)
+mode(normal.sample)
+median(normal.sample)
+mean(normal.sample)
+```
+
+
+## Quantile
+```{r quantile, echo = T}
+#quantile()
+```
+
+## Treppenfunktionen
+```{r, functionplot, echo = T}
+
+plot(cumsum(t2), type = 'S')
+
+```
+
+## Aufgaben
+
+* Ein Dataframe mit Wortlängen und jeweiligen Wortformen aus einer XML-Datei erstellen.
+* Eine gruppierte Datenreihe aus den rohen Daten konstruieren, die die Frequenzen berücksichtigt
+  (welcher Datentyp ist das?).
+* Diese Häufigkeitsverteilung mit einem Histogramm und einem Balkendiagramm darstellen.
+* Ein Balkendiagramm mit der Bibliothek `ggplot2` mit denselben Daten erstellen (oder mindestens versuchen).
+* Deskriptive Werte für die Types berechnen (wie für Tokens bereits gemacht)
+* Werte tabellarisch mit Fall, Häufigkeit, relative Häufigkeit, Summenhäufigkeit, relative Summenhäufigkeit darstellen
