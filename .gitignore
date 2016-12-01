@@ -2,4 +2,6 @@
 *_files
 *.html
 *.pdf
+.Rhistory
+.Rdata
 
