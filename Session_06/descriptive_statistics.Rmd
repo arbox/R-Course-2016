@@ -166,8 +166,7 @@ plot(cumsum(t2), type = 'S')
 
 ```
 
-## Aufgaben
-
+## Aufgaben für selbstständige Arbeit
 * Ein Dataframe mit Wortlängen und jeweiligen Wortformen aus einer XML-Datei erstellen.
 * Eine gruppierte Datenreihe aus den rohen Daten konstruieren, die die Frequenzen berücksichtigt
   (welcher Datentyp ist das?).
