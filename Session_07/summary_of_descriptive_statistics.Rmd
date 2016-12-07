@@ -1,0 +1,58 @@
+# Darstellung und Beschreibung eindimensionaler Verteilungen
+
+## Z-Standardisierung
+```{r z}
+kursA <- rep(1:6, 1:6)
+kursB <- rep(seq(1,12,by=2), 1:6)
+kursA; kursB
+z.A <- (kursA - mean(kursA))/sd(kursA)
+z.B <- (kursB - mean(kursB))/sd(kursB)
+scale(kursA)
+scale(kursB)
+z.A; z.B
+plot(density(kursA))
+plot(density(kursB))
+```
+
+
+## Desktiprive Maße
+```{r descriptive_measures}
+library(moments)
+
+random.vector <- rnorm(100)
+str(random.vector)
+summary(random.vector)
+mean(random.vector)
+median(random.vector)
+quantile(random.vector, c(0.25, 0.5, 0.75))
+sd(random.vector)
+var(random.vector)
+mad(random.vector)
+
+skewness(random.vector)
+kurtosis(random.vector)
+```
+
+## Graphische Darstellung
+
+```{r data, echo = FALSE, cache = TRUE}
+planungspausen <- read.table('../data/03-1_aeh(m).txt', header = T)
+```
+
+```{r hist}
+hist(planungspausen$LAENGE, freq = T)
+#lines(density(planungspausen$LAENGE))
+```
+
+```{r ggplot_hist}
+library(ggplot2)
+qplot(planungspausen$LAENGE, binwidth = 5)
+ggplot(planungspausen, aes(x = LAENGE)) + geom_histogram(binwidth = 15, color = 'black', fill = 'white')
+ggplot(planungspausen, aes(x = LAENGE)) + geom_density()
+```
+
+## Aufgaben für selbstständige Arbeit
+* Wortlängen in Buchstaben für einen deutschen Wikipedia-Text berechnen;
+* Desktiprive Analyse der Wortlängen vornehmen;
+* die Häufigkeitsverteilung in Form eines Historgramms darstellen;
+* die Häufigkeitsverteilung in Form eines Balkendiagramms mit der Differinzierung nach der Wortart darstellen.
