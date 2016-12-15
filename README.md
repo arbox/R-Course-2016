@@ -21,4 +21,7 @@ Arbeit mit XML-Daten. Auswahl der ignorierten Daten in Git.
 Deskriptive Statistiken. Graphische Darstellung nominaler Daten.
 
 ## Sitzung 07
-Steuungswerte. Einführung in ggplot2.
+Streuungswerte. Einführung in ggplot2.
+
+## Session 08
+Graphische Darstellung der Daten
