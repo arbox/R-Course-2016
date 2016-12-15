@@ -1,0 +1,132 @@
+# Graphische Darstellungen
+## Appetizer: Wordclouds using R
+
+Wir lesen XML-Dateien aus dem Tüba-D/Z-Korpus ein und extrahieren *Lemmata* und laufende *Wortformen*:
+```{r reading_XML, highlight = TRUE, results = 'hide', echo = TRUE, cache = TRUE}
+library(XML)
+
+tokens <- vector('character')
+types <- vector('character')
+
+xmlEventParse(
+  "../data/t_990505_47.xml", 
+  handlers = list(
+    't' = function(name, attr) {
+      tokens <<- c(tokens, attr['word'])
+      types <<- c(types, attr['lemma'])
+      ## morphology
+      }
+    ),
+  addContext = FALSE
+  )
+
+#names(tokens) <- NULL
+tokens <- unname(tokens)
+```
+
+```{r wordcloud, highlight = TRUE, echo = TRUE, cache = TRUE}
+library(tm)
+library(wordcloud)
+myCorpus = Corpus(VectorSource(tokens))
+myCorpus = tm_map(myCorpus, removePunctuation)
+myCorpus = tm_map(myCorpus, removeNumbers)
+myCorpus = tm_map(myCorpus, removeWords,
+                  c(stopwords("german"), "die", "der", "das"))
+
+myDTM = TermDocumentMatrix(myCorpus,
+                           control = list(minWordLength = 1))
+
+m = as.matrix(myDTM)
+sorted.matrix <- sort(rowSums(m), decreasing = TRUE)
+
+wordcloud(names(sorted.matrix), sorted.matrix, scale=c(4,0.5),
+          min.freq = 1, max.words = 20,
+          colors = brewer.pal(8, "Dark2"))
+```
+
+## Graphische Darstellung
+
+```{r Temperaturvergleich, highlight = TRUE, results = 'hide', echo = TRUE}
+# some vectors
+monate <- c('Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Juni', 'Juli', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez')
+stadt1 <- c(-5, -12, 5, 12, 15, 18, 22, 23, 20, 26, 8, 1)
+stadt2 <- c(6, 7, 8, 9, 10, 12, 16, 15, 11, 9, 8, 7)
+
+
+
+#pdf('out.pdf')
+plot(c(1:12), stadt1, type='b', col='dark red',
+     xlim=c(0,12), ylim=c(min(stadt1, stadt2),
+                          max(stadt1, stadt2)),
+     xlab='Monate', ylab='Temperatur im Schnitt',
+     main='Temperaturvergleich',
+     axes = FALSE)
+
+axis(1, at=1:12, labels=monate, las=2)
+axis(2, at=sort(c(stadt1, stadt2)))
+
+
+#mtext('Monate', side=1)
+#mtext('Temperatur im Schnitt', side=2)
+points(c(1:12), stadt2, type='b', col='green')
+#grid(nx=13)
+grid(NA, 39)
+abline(h=0)
+text(11, 25, 'Stadt 1')
+text(7, 10, 'Stadt 2')
+
+#box()
+#dev.off()
+```
+```{r Kuchendiagramme}
+library(plotrix)
+POS <- c(3,4,5,3,1,2,2)
+labs <- c('A', 'M', 'N', 'P', 'Part', 'V', 'Adj')
+names(POS) <- c('A', 'M', 'N', 'P', 'Part', 'V', 'Adj')
+
+par(mfrow=c(1,2))
+
+pie(POS, main="Kuchendiagramm")
+
+pie3D(POS,
+      main="POS-Verteilung",
+      labels=names(POS),
+      explode=0.1
+      )
+```
+```{r combined_graphics}
+freq <- c(rep(0, 1), rep(1000, 2), rep(2000, 3), rep(3000, 4), rep(4000, 5), rep(5000, 5), rep(6000, 5), rep(7000, 15), rep(10000, 26), rep(15000, 26), rep(25000, 8), rep(50000, 1))
+
+bins <- c(0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 10000, 15000, 25000, 50000)
+
+par(mfrow=c(2,2))
+
+par(fg='blue')
+hist(freq, freq=FALSE, breaks=bins, right = FALSE, axes = FALSE, main = NULL, xlab = NULL, ylab = NULL)
+
+axis(1,
+     at=bins,
+     labels=TRUE, # default
+     tick=TRUE, # default
+     las=2, # vertical rotation
+     ps=1
+     )
+
+barplot.matrix <- read.csv('../data/barplot.csv', header=TRUE) 
+
+barplot(as.matrix(t(barplot.matrix)[2:3,]), col=heat.colors(2), beside=TRUE,
+space=c(1,3), ylim=c(0,15), names.arg=barplot.matrix$Rang)
+grid()
+abline(0,0)
+
+library(plotrix)
+slices <- c(10, 12, 4, 16, 8)
+names(slices) <- c('A', 'M', 'N', 'P', 'V')
+pie(slices, main="Kuchendiagramm")
+pie3D(slices, explode=0.1, labels=names(slices))
+
+```
+
+## Aufgaben für selbstständige Arbeit
+
+* Aus dem vorhandenen Text Wortwolken mit jeweils nur Verben, Substantiven und grammatischen Wortformen erstellen.

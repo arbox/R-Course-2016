@@ -22,9 +22,12 @@ library(moments)
 random.vector <- rnorm(100)
 str(random.vector)
 summary(random.vector)
+
 mean(random.vector)
 median(random.vector)
+
 quantile(random.vector, c(0.25, 0.5, 0.75))
+
 sd(random.vector)
 var(random.vector)
 mad(random.vector)
