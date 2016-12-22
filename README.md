@@ -25,3 +25,7 @@ Streuungswerte. Einführung in ggplot2.
 
 ## Session 08
 Graphische Darstellung der Daten
+
+## Session 09
+Mathematische Grundoperationen
+

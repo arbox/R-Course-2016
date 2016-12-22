@@ -1,0 +1,110 @@
+---
+title: "Mathematische Operationen"
+author: "Andrei Beliankou"
+date: "22/12/2016"
+output: html_document
+---
+
+`R` ist nicht primär eine mathematische Umgebung wie z.B. `GNU Octave`, aber man findet eine Reihe von
+wichtigen Funktionen, u.A. für die Umwandlung der Matrizen.
+
+## Grundrechenarten
+```{r}
+a <- 1
+b <- 2
+a + b
+a - b
+a * b
+a / b
+a ^ b
+5 %/% 2
+5 %% 2
+```
+
+## Summen und Produkte
+```{r}
+x <- 1:10
+sum(x)
+prod(x)
+factorial(length(x))
+```
+
+## Radizes 
+```{r}
+sqrt(4)
+8^(1/3)
+```
+
+## Logarithmische Funktionen
+```{r}
+pi
+exp(1)
+log(1, base = exp(1))
+log10(100)
+log2(8)
+```
+
+## Trigonometrische Funktionen
+Radiant-Winkelmaß
+$$
+  \alpha^{\circ} = \frac{\pi}{180}\cdot \alpha \text{ rad} 
+$$
+```{r}
+pi
+sin((3/2)*pi)
+cos(0)
+cos(pi/3)
+tan(pi/4)
+```
+
+Darstellung der Funktionen
+```{r}
+library(ggplot2)
+ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = sin)
+```
+
+
+
+## Vereinigungen und Schnittmengen
+```{r}
+union(1:10,5:7)
+intersect(1:10,5:7)
+```
+
+## Matrizen
+```{r}
+A <- matrix(1:6, nrow = 2, ncol = 3, byrow = T)
+A
+t(A)
+```
+
+### Addition der Matrizen
+```{r}
+B <- matrix(6:11, nrow = 2, ncol = 3, byrow = T)
+B
+A + B
+A - B
+```
+
+### Multiplikation der Matrizen
+```{r}
+A
+A * 2
+
+D <- matrix(6:11, nrow = 3, ncol = 2, byrow = T)
+A; D
+
+A %*% D
+```
+
+## Quellen
+
+- Hedderich, Jürgen, und Lothar Sachs. _Angewandte Statistik: Methodensammlung mit R._ 14th ed. Springer, 2012. S. 37-45
+
+## Aufgaben
+
+Wir nehmen an, dass die Länge der Wörter in Buchstaben linear mit der Häufigkeit zusammenhängt:
+
+- bilden Sie eine Matrix mit 10 Beobachtungen über die Länge;
+- entwerfen Sie drei lineare Modelle mit Ihrer Parameterschätzung;
+- berechnen Sie die vorhergesagte Häufigkeitswerte.
