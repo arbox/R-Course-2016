@@ -29,3 +29,5 @@ Graphische Darstellung der Daten
 ## Session 09
 Mathematische Grundoperationen
 
+## Session 10
+ggplot2: Tutorial
