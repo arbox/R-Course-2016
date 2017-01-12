@@ -5,9 +5,16 @@ date: "11/01/2017"
 output: html_document
 ---
 
-# ggplot2
+# Arbeit mit dem Paket _ggplot2_
 
-```{r}
-print('hello')
-```
+## Links
+* [DataCamp](https://www.datacamp.com/)
+* _Wilkinson, Leland, and Graham Wills_. The Grammar of Graphics. 2nd ed. Statistics and Computing. New York: Springer, 2005. [link](https://www.amazon.de/Grammar-Graphics-Statistics-Computing/dp/1441920331/ref=sr_1_1)
+* _Wickham, Hadley_. ggplot2 : Elegant Graphics for Data Analysis. Use R! Springer Science   Business Media, 2009.[link](https://www.amazon.de/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/ref=pd_sbs_14_4)
+
+
+
+## Aufgaben für selbstständige Arbeit
+* Alles Punkte des Tutorials sebstständig durcharbeiten.
+ 
 
