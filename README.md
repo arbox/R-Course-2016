@@ -31,3 +31,6 @@ Mathematische Grundoperationen
 
 ## Session 10
 ggplot2: Tutorial
+
+## Session 11
+Chi-Quadrat-Tests auf Unabhängigkeit
