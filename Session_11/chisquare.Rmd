@@ -1,0 +1,63 @@
+---
+title: "Chi-Quadrat-Anpassungen"
+author: "Andrei Beliankou"
+date: "18/01/2017"
+output: html_document
+---
+================================
+
+# Chi-Quadrat
+
+## Multinomiale Verteilung
+```{r}
+cols <- c("blue", "brown", "green", "orange", "red", "yellow", "purple") 
+prob = c(1, 1, 1, 1, 2, 2, 2)
+bag.full.mms <- sample(cols, 30, replace = TRUE, prob = prob) 
+table(bag.full.mms) 
+```
+
+## Berechnung der Wahrscheinlichkeit
+$$
+  P(X_1 = x_1, X_2 = x_2, \ldots , X_k = x_k) =
+    {n \choose x_1} {{n - x_1} \choose x_2} \dots {{n - x_1 - \ldots - x_{k - 1}} \choose x_k}
+    p_1^{x_1}p_2^{x_2}\ldots p_k^{x_k}
+$$
+
+## Berechnung in R
+```{r}
+choose(100,35)*choose(70,40) * 0.35^35 * 0.35^40 * 0.30^25  # choose(25, 25) = 1
+```
+
+
+## Chi-Quadrat-Test
+$$
+\chi^2 = \sum\frac{(f_o - f_e)^2}{f_e}
+$$
+
+```{r}
+x <- c(35, 40, 25)
+p <- c(35, 35, 30)
+p <- p/sum(p)
+n <- sum(x) 
+chi.squared <- sum( (x - n*p)^2 / (n*p)) 
+chi.squared
+```
+
+```{r}
+pchisq(chi.squared, df = 3 - 1, lower.tail = F)
+```
+
+```{r}
+chisq.test(x, p = p) 
+```
+
+
+## Aufgaben
+- nehmen Sie zwei Texte im TigerXML-Format;
+- extrahieren Sie die ersten 100 Autosemantika;
+- teilen Sie diese Beobachtungen in A-, V- und N-Wörter auf,
+- vergleichen Sie die beiden Häufigkeitsverteilungen mit Hilfe von dem Chi-Quadrat-Test.
+
+
+## Quellen
+- John Verzani. _Using R for Introductory Statistics_. CRC, 2004, pp. 239-247
