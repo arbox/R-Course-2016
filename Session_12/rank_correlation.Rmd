@@ -1,0 +1,78 @@
+---
+title: "Korrelation für ordinale Daten"
+author: "Andrei Beliankou"
+date: "25/01/2017"
+output: html_document
+---
+================================
+
+# Rangkorrelation nach Spearman
+
+Die Rangkorrelation nach Spearman ist eine Methode der Zusammenhangsanalyse. Sie wird eingesezt ab dem _ordinalen_ Skalierungsniveau.
+Für intervallskalierten Daten (und höher) macht der Einsazt dieser Methode Sinn, wenn wir keine Idee über die Verteilung der Stichprobe
+haben.
+
+
+## Berechnungsformel für die Rangkorrelation
+$$
+  \rho = 1 - \frac{6\cdot \sum^N_{i=1} d_j^2}{N(N^2 - 1)}
+$$
+
+## Daten einlesen
+
+```{r data}
+fast.food.data <- read.table('../data/fast_food_revenues.csv', header = T, sep = ',')
+fast.food.data
+```
+
+## Rang berechnen
+```{r rank, echo = T}
+
+sales.rank <- rank(fast.food.data$Sales)
+location.rank <- rank(fast.food.data$Locations)
+sales.rank
+location.rank
+```
+
+## Daten vorbereiten
+```{r cbind}
+fast.food.data <- cbind(fast.food.data, LocationRank = location.rank, SalesRank = sales.rank)
+fast.food.data
+```
+
+## Visuelle Darstellung
+```{r abline}
+plot(l <- fast.food.data$Locations, s <- fast.food.data$Sales,
+     xlab = "# of Locations", ylab = "Revenue",
+     main = "Umsatz vs. Verbreitung")
+
+abline(lm(s ~ l))
+```
+
+## Correlation
+```{r cor}
+cor(fast.food.data$SalesRank, fast.food.data$LocationRank)
+```
+
+## Eigene Funktion für die Rangkorrelation
+```{r rank_correlation}
+
+calculate.rho <- function(x, y) {
+  dif <- x - y
+  n <- length(dif)
+  rho <- 1 - (6 * sum(dif^2)) / (n * (n^2 - 1))
+  return(rho)
+}
+
+calculate.rho(fast.food.data$SalesRank, fast.food.data$LocationRank)
+```
+
+
+## Aufgaben für selbstständige Arbeit
+
+* ein Dataframe mit der jeweiligen Wortform, ihrer Länge in Buchstaben und der absoluten Häufigkeit erstellen;
+* die Ranglisten für die Länge und Häufigkeit berechnen;
+* die Rangkorrelation zwischen der Häufigkeit und der Länge bestimmen.
+
+## Quellen
+Die Inhalte dieser Übung basieren auf dem Kapitel 16 aus Pace L. _Beginning R: An Introduction in Statistical Programming._ Apress: 2012

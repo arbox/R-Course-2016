@@ -34,3 +34,6 @@ ggplot2: Tutorial
 
 ## Session 11
 Chi-Quadrat-Tests auf Unabhängigkeit
+
+## Session 12
+Rangkorrelation nach Spearman
