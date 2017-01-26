@@ -15,7 +15,7 @@ haben.
 
 ## Berechnungsformel für die Rangkorrelation
 $$
-  \rho = 1 - \frac{6\cdot \sum^N_{i=1} d_j^2}{N(N^2 - 1)}
+  \rho = 1 - \frac{6\cdot \sum^N_{i=1} d_i^2}{N(N^2 - 1)}
 $$
 
 ## Daten einlesen
@@ -48,6 +48,13 @@ plot(l <- fast.food.data$Locations, s <- fast.food.data$Sales,
 
 abline(lm(s ~ l))
 ```
+
+```{r}
+library(ggplot2)
+ggplot(data = fast.food.data, aes(x = Locations, y = Sales)) + geom_point() +
+  geom_smooth(method = 'loess') + geom_smooth(method = 'lm', col = 'red')
+```
+
 
 ## Correlation
 ```{r cor}
