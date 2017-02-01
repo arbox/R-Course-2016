@@ -37,3 +37,9 @@ Chi-Quadrat-Tests auf Unabhängigkeit
 
 ## Session 12
 Rangkorrelation nach Spearman
+
+## Session 13
+Lineare Modelle für metrische Daten
+
+## Session 14
+Logistische Regression
