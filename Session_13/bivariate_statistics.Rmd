@@ -1,0 +1,101 @@
+---
+title: "Korrelation für verhältnisskalierte Daten"
+author: "Andrei Beliankou"
+date: "02/02/2017"
+output: html_document
+---
+================================
+
+# Kovarianz, Korrelation, Regression
+
+## Kovarianz
+
+```{r Verteilung der Gewichte}
+weights <- c(119.5, 135.0, 137.1, 137.4, 139.0, 144.1, 144.2, 151.0, 151.3,
+             151.8, 152.6, 156.3, 161.9, 162.4, 164.2, 164.7, 166.1, 166.8,
+             169.1, 169.8, 170.1, 172.9, 173.3, 174.8, 175.2, 175.8, 176.7,
+             179.3, 186.6, 189.1, 191.1, 193.8, 198.0, 201.5, 204.6, 209.4,
+             213.3, 214.5, 220.6, 237.1)
+y <- sort(weights)
+
+x <- sort(rnorm(40, 70, 6))
+
+matrix <- cbind(x, y)
+
+head(matrix)
+
+cov(x, y)
+cov(y, x)
+
+cor(x, y)
+cor(y, x)
+```
+
+```{r matrix.preview}
+matrix
+```
+
+
+## Regressionsgerade
+
+```{r Regressionsgeraden}
+plot(x, y, xlab = "height", ylab = "weight", main = "weights and heights")
+
+abline(lm(y ~ x))
+```
+
+
+## Iterkorrelations (Varianz - Kovarianz)
+```{r Iterkorrelationsmatrix}
+z <- rnorm(40, 80, 10)
+z <- sort(z)
+
+matrix <- cbind(x,y,z)
+cov(matrix)
+
+cor(matrix)
+
+var(x)
+
+cov(x,y)
+
+cov(x,z)
+
+cor(x,z)
+```
+
+## Regressionsmodelle
+```{r hours}
+load('../data/hours.RData')
+hours
+
+plot(hours$Hours, hours$GPA)
+
+abline(lm(hours$GPA ~ hours$Hours))
+
+cor(hours$Hours, hours$GPA)
+
+lm(hours$GPA ~ hours$Hours)
+
+results <- lm(hours$GPA ~ hours$Hours)
+summary(results)
+
+
+predicted <- predict(results)
+
+resid <- residuals(results)
+
+predicted
+
+resid
+
+```
+
+## Aufgaben für selbstständige Nachbereitung
+* 20 Texte auf dem TüBa-D/Z einlesen (`for`-Schleifen verweden)
+* Wortformen extrahieren, eine Häufigkeitsverteilung vorbereiten
+* Korrelation der Worlänge in Buchstaben und der Häufigkeit des Wortes berechnen
+* Die Punktwolke nach den obigen zwei Paramentern darstellen
+
+## Quellen
+Die Inhalte dieser Übung basieren auf dem Kapitel 12 aus Pace L. _Beginning R: An Introduction in Statistical Programming._ Apress: 2012
