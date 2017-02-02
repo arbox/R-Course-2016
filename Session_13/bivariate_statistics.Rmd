@@ -44,6 +44,15 @@ plot(x, y, xlab = "height", ylab = "weight", main = "weights and heights")
 abline(lm(y ~ x))
 ```
 
+```{r ggplot2-based-line}
+library(ggplot2)
+ggplot(data = data.frame(x, y), aes(x = x, y = y)) + geom_point() +
+  geom_smooth(method = 'lm', se = F)
+
+ggplot(data = data.frame(x, y), aes(x = x, y = y)) + geom_point() +
+  geom_abline(intercept = -96.214217, slope = 3.759507)
+```
+
 
 ## Iterkorrelations (Varianz - Kovarianz)
 ```{r Iterkorrelationsmatrix}
@@ -70,6 +79,8 @@ load('../data/hours.RData')
 hours
 
 plot(hours$Hours, hours$GPA)
+
+# ggplot(hours, aes(x = Hours, y = GPA)) + geom_smooth() + geom_point()
 
 abline(lm(hours$GPA ~ hours$Hours))
 
